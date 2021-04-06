@@ -1,0 +1,51 @@
+---
+title: "rmarkdown_plotly"
+author: "mike foo"
+date: "4/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<span style="text-decoration:underline;font-style:bold;font-size: 20px">
+ **Date : Tue Apr 06 17:53:24 2021**
+</span>
+
+```{r lib, warning=FALSE, echo=TRUE, message=FALSE}
+library(plotly)
+library(htmltools)
+```
+
+## Including mtcars Plots
+
+```{r plot, warning=FALSE, message=FALSE}
+data("mtcars")
+plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", color = ~disp, size = ~hp)
+
+```
+
+
+## Including geographic Plots
+
+```{r plot2, warning=FALSE, include=TRUE}
+# Create data frame
+state_pop <- data.frame(State = state.abb, Pop = as.vector(state.x77[,1]))
+# Create hover text
+state_pop$hover <- with(state_pop, paste(State, '<br>', "Population:", Pop))
+# Make state borders white
+borders <- list(color = toRGB("red"))
+# Set up some mapping options
+map_options <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white')
+)
+plot_ly(name = "maps",z = ~state_pop$Pop, text = ~state_pop$hover, locations = ~state_pop$State, 
+        type = 'choropleth', locationmode = 'USA-states', 
+        color = state_pop$Pop, colors = 'Blues', marker = list(line = borders)) %>%
+  layout(title = 'US Population in 1975', geo = map_options)
+
+```
