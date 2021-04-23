@@ -4,9 +4,10 @@ author: "mike foo"
 date: "4/6/2021"
 output: html_document
 ---
-
+rmarkdown::render_site()
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 <span style="text-decoration:underline;font-style:bold;font-size: 20px">
@@ -49,3 +50,5 @@ plot_ly(name = "maps",z = ~state_pop$Pop, text = ~state_pop$hover, locations = ~
   layout(title = 'US Population in 1975', geo = map_options)
 
 ```
+
+

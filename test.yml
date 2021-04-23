@@ -1,0 +1,12 @@
+name: "r_markdown_plotly"
+output_dir: "docs"
+navbar:
+  title: "plotly"
+left:
+  - text: "Home"
+href: index.html
+- text: "mtcars plot and Geographic"
+href: r_markdown_plotly.html
+output:
+  html_document:
+  theme: cosmo
